@@ -113,22 +113,24 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            background: #F7F5F2;
+            border-bottom: 1px solid #E8E6E3;
             transition: background 0.4s, padding 0.3s, box-shadow 0.4s;
         }
 
         #navbar.scrolled {
-            background: rgba(17, 25, 40, 0.93);
+            background: rgba(247,245,242,0.98);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
             padding: 0.9rem 2.5rem;
-            box-shadow: 0 2px 24px rgba(0,0,0,0.25);
+            box-shadow: 0 2px 16px rgba(27,46,75,0.1);
         }
 
         .nav-logo {
             font-family: 'Playfair Display', serif;
             font-size: 1.4rem;
             font-weight: 700;
-            color: var(--white);
+            color: var(--navy);
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -145,17 +147,22 @@
         }
 
         .nav-links a {
-            color: rgba(247,245,242,0.78);
+            color: #1B2E4B;
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 400;
-            transition: color 0.2s;
+            border-radius: 4px;
+            padding: 0.3rem 0.5rem;
+            transition: color 0.2s, background 0.2s;
         }
-        .nav-links a:hover { color: var(--amber); }
+        .nav-links a:not(.nav-cta):hover {
+            color: #1B2E4B;
+            background: rgba(27,46,75,0.08);
+        }
 
         .nav-cta {
             background: var(--amber) !important;
-            color: var(--navy) !important;
+            color: #1B2E4B !important;
             padding: 0.55rem 1.2rem !important;
             border-radius: 4px;
             font-weight: 600 !important;
@@ -163,7 +170,7 @@
         }
         .nav-cta:hover {
             background: var(--amber-dark) !important;
-            color: var(--white) !important;
+            color: var(--navy) !important;
             transform: translateY(-1px) !important;
         }
 
@@ -180,7 +187,7 @@
         .hamburger span {
             display: block;
             width: 24px; height: 2px;
-            background: var(--white);
+            background: var(--navy);
             border-radius: 2px;
             transition: all 0.3s;
         }
