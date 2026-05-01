@@ -109,7 +109,8 @@
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 200;
-            padding: 1.4rem 2.5rem;
+            padding: 0.75rem 2.5rem;
+            min-height: 80px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -149,10 +150,10 @@
         .nav-links a {
             color: #1B2E4B;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.875rem;
             font-weight: 400;
             border-radius: 4px;
-            padding: 0.3rem 0.5rem;
+            padding: 0.625rem 1rem;
             transition: color 0.2s, background 0.2s;
         }
         .nav-links a:not(.nav-cta):hover {
@@ -163,8 +164,9 @@
         .nav-cta {
             background: var(--amber) !important;
             color: #1B2E4B !important;
-            padding: 0.55rem 1.2rem !important;
+            padding: 0.6875rem 1.5rem !important;
             border-radius: 4px;
+            font-size: 0.875rem !important;
             font-weight: 600 !important;
             transition: background 0.2s, transform 0.2s !important;
         }
@@ -740,7 +742,7 @@
 <!-- ════ NAVIGATION ═══════════════════════════════════════════════════════ -->
 <nav id="navbar" aria-label="Main navigation">
     <a href="#hero" class="nav-logo">
-        <img src="arc-launchpad-logo.png" alt="ARC Launchpad" height="40">
+        <img src="arc-launchpad-logo.png" alt="ARC Launchpad" height="56">
     </a>
 
     <ul class="nav-links" id="navLinks">
