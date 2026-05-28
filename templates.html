@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Templates — ARC Launchpad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKENS ──────────────────────────────────────────────────────── */
+    :root {
+      --navy:       #0f1e3a;
+      --navy-mid:   #162040;
+      --navy-light: #1e2e52;
+      --gold:       #c9973a;
+      --gold-light: #e0b05a;
+      --gold-pale:  #f5e8cc;
+      --cream:      #f7f3ec;
+      --white:      #ffffff;
+      --text-dim:   rgba(255,255,255,0.55);
+      --text-mid:   rgba(255,255,255,0.75);
+      --border:     rgba(201,151,58,0.2);
+      --border-dim: rgba(255,255,255,0.08);
+
+      --serif:  'Cormorant Garamond', Georgia, serif;
+      --sans:   'DM Sans', system-ui, sans-serif;
+
+      --max: 1160px;
+      --radius: 4px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--navy);
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(15,30,58,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-dim);
+      height: 68px;
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+    }
+
+    .nav-inner {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo svg { width: 36px; height: 36px; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--text-mid);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a.active { color: var(--gold); }
+
+    .nav-cta {
+      background: var(--gold);
+      color: var(--navy) !important;
+      font-weight: 600 !important;
+      padding: 9px 22px;
+      border-radius: var(--radius);
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--gold-light) !important; color: var(--navy) !important; }
+
+    /* ── HERO ────────────────────────────────────────────────────────── */
+    .hero {
+      padding: 160px 40px 100px;
+      text-align: center;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,151,58,0.07) 0%, transparent 70%),
+        linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 100%);
+      border-bottom: 1px solid var(--border-dim);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(255,255,255,0.025) 80px),
+        repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(255,255,255,0.025) 80px);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero-eyebrow span { margin: 0 8px; opacity: 0.5; }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(48px, 6vw, 80px);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      max-width: 760px;
+      margin: 0 auto 24px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto 48px;
+    }
+
+    .hero-badges {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-mid);
+      letter-spacing: 0.03em;
+    }
+
+    .badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ── SECTION WRAPPER ─────────────────────────────────────────────── */
+    section { padding: 100px 40px; }
+
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 16px;
+      color: var(--text-mid);
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 520px;
+    }
+
+    /* ── BUNDLES SECTION ─────────────────────────────────────────────── */
+    .bundles { background: var(--navy-mid); }
+
+    .bundles-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 64px;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .bundle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    /* ── BUNDLE CARD ─────────────────────────────────────────────────── */
+    .bundle-card {
+      background: var(--navy);
+      border: 1px solid var(--border-dim);
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.25s, transform 0.25s;
+      position: relative;
+    }
+
+    .bundle-card:hover {
+      border-color: var(--border);
+      transform: translateY(-3px);
+    }
+
+    .bundle-card.featured {
+      border-color: var(--gold);
+      background: linear-gradient(160deg, rgba(201,151,58,0.06) 0%, var(--navy) 50%);
+    }
+
+    .featured-tag {
+      position: absolute;
+      top: 20px; right: 20px;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+
+    .bundle-card-top {
+      padding: 36px 36px 28px;
+      border-bottom: 1px solid var(--border-dim);
+    }
+
+    .bundle-icon {
+      width: 44px; height: 44px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 20px;
+      background: rgba(201,151,58,0.1);
+    }
+
+    .bundle-name {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .bundle-tagline {
+      font-size: 13px;
+      color: var(--text-dim);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .bundle-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .bundle-price {
+      font-family: var(--serif);
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .bundle-price-note {
+      font-size: 12px;
+      color: var(--text-dim);
+      font-weight: 300;
+    }
+
+    .bundle-card-body {
+      padding: 28px 36px;
+      flex: 1;
+    }
+
+    .bundle-items-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .bundle-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .bundle-items li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      color: var(--text-mid);
+      line-height: 1.4;
+    }
+
+    .bundle-items li::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .bundle-items li span {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      background: rgba(201,151,58,0.12);
+      padding: 2px 6px;
+      border-radius: 2px;
+      margin-left: 4px;
+      vertical-align: middle;
+      text-transform: uppercase;
+    }
+
+    .btn-buy {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 14px 24px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-buy:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.35);
+      transform: translateY(-1px);
+    }
+
+    /* ── TOOLKIT BANNER ──────────────────────────────────────────────── */
+    .toolkit-banner {
+      margin-top: 40px;
+      background: linear-gradient(135deg, rgba(201,151,58,0.12) 0%, rgba(201,151,58,0.04) 100%);
+      border: 1px solid var(--gold);
+      border-radius: 6px;
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .toolkit-left { flex: 1; min-width: 260px; }
+
+    .toolkit-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 2px;
+      margin-bottom: 16px;
+    }
+
+    .toolkit-title {
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .toolkit-sub {
+      font-size: 14px;
+      color: var(--text-mid);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .toolkit-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .toolkit-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .toolkit-price {
+      font-family: var(--serif);
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .toolkit-value {
+      font-size: 13px;
+      color: var(--text-dim);
+      text-decoration: line-through;
+    }
+
+    .toolkit-count {
+      font-size: 12px;
+      color: var(--text-mid);
+      margin-bottom: 16px;
+    }
+
+    .toolkit-buy {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 14px 36px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .toolkit-buy:hover { background: var(--gold-light); }
+
+    /* ── INDIVIDUAL TEMPLATES ─────────────────────────────────────────── */
+    .individuals { background: var(--navy); }
+
+    .ind-intro {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .ind-intro .section-sub { margin: 0 auto; }
+
+    .ind-group { margin-bottom: 56px; }
+
+    .ind-group-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-dim);
+    }
+
+    .ind-group-name {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .ind-group-count {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .ind-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .ind-card {
+      background: var(--navy-mid);
+      border: 1px solid var(--border-dim);
+      border-radius: 6px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .ind-card:hover {
+      border-color: rgba(201,151,58,0.3);
+      transform: translateY(-2px);
+    }
+
+    .ind-format {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(201,151,58,0.1);
+      padding: 3px 8px;
+      border-radius: 2px;
+      width: fit-content;
+    }
+
+    .ind-name {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .ind-desc {
+      font-size: 12.5px;
+      color: var(--text-dim);
+      line-height: 1.6;
+      font-weight: 300;
+      flex: 1;
+    }
+
+    .ind-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-dim);
+    }
+
+    .ind-price {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .ind-buy {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--navy);
+      background: var(--gold);
+      padding: 7px 16px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .ind-buy:hover { background: var(--gold-light); }
+
+    /* ── TRUST BAR ───────────────────────────────────────────────────── */
+    .trust-bar {
+      background: var(--navy-light);
+      border-top: 1px solid var(--border-dim);
+      border-bottom: 1px solid var(--border-dim);
+      padding: 32px 40px;
+    }
+
+    .trust-bar .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-mid);
+      font-weight: 400;
+    }
+
+    .trust-icon {
+      width: 18px; height: 18px;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ── FAQ ─────────────────────────────────────────────────────────── */
+    .faq { background: var(--navy-mid); }
+
+    .faq-header { margin-bottom: 48px; }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 0;
+    }
+
+    .faq-item {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border-dim);
+    }
+
+    .faq-item:nth-child(odd) { padding-right: 48px; }
+    .faq-item:nth-child(even) { padding-left: 48px; border-left: 1px solid var(--border-dim); }
+
+    .faq-q {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .faq-a {
+      font-size: 13.5px;
+      color: var(--text-mid);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── BOTTOM CTA ──────────────────────────────────────────────────── */
+    .bottom-cta {
+      background: var(--navy);
+      text-align: center;
+      padding: 100px 40px;
+      border-top: 1px solid var(--border-dim);
+    }
+
+    .bottom-cta h2 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 600;
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+
+    .bottom-cta h2 em { font-style: italic; color: var(--gold); }
+
+    .bottom-cta p {
+      font-size: 16px;
+      color: var(--text-mid);
+      font-weight: 300;
+      max-width: 480px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .cta-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-lg {
+      font-size: 14px;
+      font-weight: 600;
+      padding: 16px 36px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: all 0.2s;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .btn-gold:hover { background: var(--gold-light); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.22);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.4);
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────────────── */
+    footer {
+      background: var(--navy-mid);
+      border-top: 1px solid var(--border-dim);
+      padding: 40px;
+    }
+
+    .footer-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--white); }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      section { padding: 72px 20px; }
+      .hero { padding: 120px 20px 80px; }
+      .bundles-header { margin-bottom: 40px; }
+      .toolkit-banner { padding: 28px 24px; }
+      .toolkit-right { align-items: flex-start; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .faq-item:nth-child(even) { padding-left: 0; border-left: none; }
+      .trust-bar { padding: 24px 20px; }
+      footer { padding: 28px 20px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 4L32 30H4L18 4Z" fill="none" stroke="#c9973a" stroke-width="2"/>
+          <path d="M18 14L25 28H11L18 14Z" fill="#c9973a" opacity="0.4"/>
+        </svg>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/#process">Process</a></li>
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/#work">Work</a></li>
+        <li><a href="/templates" class="active">Templates</a></li>
+        <li><a href="/#why">Why Us</a></li>
+        <li><a href="/#contact" class="nav-cta">Book a Call</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">ARC Intelligence <span>·</span> Digital Templates <span>·</span> Instant Download</div>
+    <h1>Professional Templates<br><em>Built by a Real Operator.</em></h1>
+    <p class="hero-sub">
+      Every template in this library was built from 20+ years of running actual businesses — not designed by someone who's never made payroll.
+    </p>
+    <div class="hero-badges">
+      <div class="badge"><div class="badge-dot"></div>Fully Editable</div>
+      <div class="badge"><div class="badge-dot"></div>Google Sheets & Docs Compatible</div>
+      <div class="badge"><div class="badge-dot"></div>Instant Download</div>
+      <div class="badge"><div class="badge-dot"></div>No Fluff. Operator-Built.</div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="container">
+      <div class="trust-item">
+        <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Trusted by SMB owners & entrepreneurs
+      </div>
+      <div class="trust-item">
+        <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        12 professional-grade templates
+      </div>
+      <div class="trust-item">
+        <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Make a copy — keep it forever
+      </div>
+      <div class="trust-item">
+        <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        Works in Excel, Word, Google Docs & Sheets
+      </div>
+    </div>
+  </div>
+
+  <!-- BUNDLES -->
+  <section class="bundles" id="bundles">
+    <div class="container">
+      <div class="bundles-header">
+        <div>
+          <div class="section-label">Template Packs</div>
+          <h2 class="section-title">Start with a Pack.<br>Get Everything You Need.</h2>
+        </div>
+        <p class="section-sub">
+          Each pack is a complete toolkit for one area of your business. Buy the pack that matches where you are right now.
+        </p>
+      </div>
+
+      <div class="bundle-grid">
+
+        <!-- Pack 1: Financial -->
+        <div class="bundle-card">
+          <div class="bundle-card-top">
+            <div class="bundle-icon">💰</div>
+            <div class="bundle-name">Financial Foundations Pack</div>
+            <div class="bundle-tagline">Know your numbers before the bank does. Four financial tools every business owner needs in Year 1.</div>
+            <div class="bundle-price-row">
+              <div class="bundle-price">$49</div>
+              <div class="bundle-price-note">4 templates · instant download</div>
+            </div>
+          </div>
+          <div class="bundle-card-body">
+            <div class="bundle-items-label">What's included</div>
+            <ul class="bundle-items">
+              <li>12-Month Cash Flow Forecast <span>xlsx</span></li>
+              <li>Monthly P&amp;L Tracker with Dashboard <span>xlsx</span></li>
+              <li>Startup Cost Estimator (60+ line items) <span>xlsx</span></li>
+              <li>Break-Even Calculator + Scenario Planner <span>xlsx</span></li>
+            </ul>
+            <a href="#" class="btn-buy">Get the Financial Pack — $49</a>
+          </div>
+        </div>
+
+        <!-- Pack 2: Client Relations -->
+        <div class="bundle-card featured">
+          <div class="featured-tag">Most Popular</div>
+          <div class="bundle-card-top">
+            <div class="bundle-icon">📋</div>
+            <div class="bundle-name">Client Relations Pack</div>
+            <div class="bundle-tagline">Look professional from your first client interaction. Four documents that cover the full client lifecycle.</div>
+            <div class="bundle-price-row">
+              <div class="bundle-price">$49</div>
+              <div class="bundle-price-note">4 templates · instant download</div>
+            </div>
+          </div>
+          <div class="bundle-card-body">
+            <div class="bundle-items-label">What's included</div>
+            <ul class="bundle-items">
+              <li>Client Service Agreement (9-section contract) <span>docx</span></li>
+              <li>Professional Invoice Template (4 tabs) <span>xlsx</span></li>
+              <li>Independent Contractor Agreement (1099-ready) <span>docx</span></li>
+              <li>Client Onboarding Questionnaire <span>docx</span></li>
+            </ul>
+            <a href="#" class="btn-buy">Get the Client Relations Pack — $49</a>
+          </div>
+        </div>
+
+        <!-- Pack 3: Business Launch -->
+        <div class="bundle-card">
+          <div class="bundle-card-top">
+            <div class="bundle-icon">🚀</div>
+            <div class="bundle-name">Business Launch Starter Pack</div>
+            <div class="bundle-tagline">Everything you need before you spend your first dollar. From idea to open-for-business, structured.</div>
+            <div class="bundle-price-row">
+              <div class="bundle-price">$49</div>
+              <div class="bundle-price-note">5 templates · instant download</div>
+            </div>
+          </div>
+          <div class="bundle-card-body">
+            <div class="bundle-items-label">What's included</div>
+            <ul class="bundle-items">
+              <li>70-Item Business Launch Checklist <span>docx</span></li>
+              <li>One-Page Business Plan Template <span>docx</span></li>
+              <li>Competitor Analysis Worksheet (5 tabs) <span>xlsx</span></li>
+              <li>Business Self-Assessment Questionnaire <span>docx</span></li>
+              <li>Startup Cost Estimator (60+ line items) <span>xlsx</span></li>
+            </ul>
+            <a href="#" class="btn-buy">Get the Launch Pack — $49</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Toolkit Banner -->
+      <div class="toolkit-banner">
+        <div class="toolkit-left">
+          <div class="toolkit-badge">Best Value</div>
+          <div class="toolkit-title">Complete Small Business Toolkit</div>
+          <div class="toolkit-sub">All three packs. 12 professional templates. Everything a first-year business owner needs — in one place.</div>
+        </div>
+        <div class="toolkit-right">
+          <div class="toolkit-price-row">
+            <div class="toolkit-price">$129</div>
+            <div class="toolkit-value">$147</div>
+          </div>
+          <div class="toolkit-count">12 templates · all three packs · instant download</div>
+          <a href="#" class="toolkit-buy">Get the Complete Toolkit — $129</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INDIVIDUAL TEMPLATES -->
+  <section class="individuals" id="individual">
+    <div class="container">
+      <div class="ind-intro">
+        <div class="section-label">Individual Templates</div>
+        <h2 class="section-title">Prefer to Start Small?</h2>
+        <p class="section-sub">Pick exactly what you need. Every individual template is also included in its pack — buying the pack saves you $27+.</p>
+      </div>
+
+      <!-- Group 1 -->
+      <div class="ind-group">
+        <div class="ind-group-header">
+          <div class="ind-group-name">Financial Foundations</div>
+          <div class="ind-group-count">4 templates</div>
+        </div>
+        <div class="ind-grid">
+          <div class="ind-card">
+            <div class="ind-format">xlsx</div>
+            <div class="ind-name">12-Month Cash Flow Forecast</div>
+            <div class="ind-desc">Project monthly cash in and out. See negative months before they hit your bank account.</div>
+            <div class="ind-footer">
+              <div class="ind-price">$19</div>
+              <a href="#" class="ind-buy">Buy</a>
+            </div>
+          </div>
+          <div class="ind-card">
+            <div class="ind-format">xlsx</div>
+            <div class="ind-name">Monthly P&amp;L Tracker</div>
+            <div class="ind-desc">Track revenue, expenses, and profit every month with a built-in financial dashboard.</div>
+            <div class="ind-footer">
+              <div class="ind-price">$19</div>
+              <a href="#" class="ind-buy">Buy</a>
+            </div>
+          </div>
+          <div class="ind-card">
+            <div class="ind-format">xlsx</div>
+            <div class="ind-name">Startup Cost Estimator</div>
+            <div class="ind-desc">60+ line items across 10 categories. Calculates your total funding needed including cash reserve.</div>
+            <div class="ind-footer">
+              <div class="ind-price">$15</div>
+              <a href="#" class="ind-buy">Buy</a>
+            </div>
+          </div>
+          <div class="ind-card">
+            <div class="ind-format">xlsx</div>
+            <div class="ind-name">Break-Even Calculator</div>
+            <div class="ind-desc">Know exactly how many sales you need to cover your costs. Includes scenario planner and annual projection.</div>
+            <div class="ind-footer">
+              <div class="ind-price">$15</div>
+              <a href="#" class="ind-buy">Buy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Group 2 -->
+      <div class="ind-group">
+        <div class="ind-group-header">
+          <div class="ind-group-name">Client Relations</div>
+          <div class="ind-group-count">4 templates</div>
+        </div>
+        <div class="ind-grid">
+          <div class="ind-card">
+            <div class="ind-format">docx</div>
+            <div class="ind-name">Client Service Agreement</div>
+            <div class="ind-desc">9-section professional contract covering scope, payment, IP, confidentiality, and dispute resolution.</div>
+            <div class="ind-footer">
+              <div class="ind-price">$19</div>
+              <a href="#" class="ind-buy">Buy</a>
+            </div>
+          </div>
+          <div class="ind-card">
+            <div class="ind-format">xlsx</div>
+            <div class="ind-name">Professional Invoice Template</div>
+            <div class="ind-desc">Standard invoice, recurring invoice, statement of account, and payment receipt — all in one workbook.</div>
+            <div class="ind-footer">
+              <div class="ind-price">$15</div>
+              <a href="#" class="ind-buy">Buy</a>
+            </div>
+          </div>
+          <div class="ind-card">
+            <div class="ind-format">docx</div>
+            <div class="ind-name">Independent Contractor Agreement</div>
+            <div class="ind-desc">1099-ready contract with IRS classification language, IP assignment, and tax responsibility clauses.</div>
+            <div class="ind-footer">
+              <div class="ind-price">$19</div>
+              <a href="#" class="ind-buy">Buy</a>
+            </div>
+          </div>
+          <div class="ind-card">
+            <div class="ind-format">docx</div>
+            <div class="ind-name">Client Onboarding Questionnaire</div>
+            <div class="ind-desc">7-section intake form covering goals, systems, budget, and working preferences. Send before every kickoff call.</div>
+            <div class="ind-footer">
+              <div class="ind-price">$15</div>
+              <a href="#" class="ind-buy">Buy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Group 3 -->
+      <div class="ind-group">
+        <div class="ind-group-header">
+          <div class="ind-group-name">Business Launch</div>
+          <div class="ind-group-count">5 templates</div>
+        </div>
+        <div class="ind-grid">
+          <div class="ind-card">
+            <div class="ind-format">docx</div>
+            <div class="ind-name">Business Launch Checklist</div>
+            <div class="ind-desc">70+ items across 6 phases from validation to your first 90 days. Never miss a critical step.</div>
+            <div class="ind-footer">
+              <div class="ind-price">$15</div>
+              <a href="#" class="ind-buy">Buy</a>
+            </div>
+          </div>
+          <div class="ind-card">
+            <div class="ind-format">docx</div>
+            <div class="ind-name">One-Page Business Plan</div>
+            <div class="ind-desc">10-section strategic plan on a single page. Built for lenders, investors, partners, and founders.</div>
+            <div class="ind-footer">
+              <div class="ind-price">$15</div>
+              <a href="#" class="ind-buy">Buy</a>
+            </div>
+          </div>
+          <div class="ind-card">
+            <div class="ind-format">xlsx</div>
+            <div class="ind-name">Competitor Analysis Worksheet</div>
+            <div class="ind-desc">5-tab competitive research workbook. Grid, scoring matrix, positioning map, SWOT, and gap analysis.</div>
+            <div class="ind-footer">
+              <div class="ind-price">$15</div>
+              <a href="#" class="ind-buy">Buy</a>
+            </div>
+          </div>
+          <div class="ind-card">
+            <div class="ind-format">docx</div>
+            <div class="ind-name">Business Self-Assessment</div>
+            <div class="ind-desc">9-section owner-facing questionnaire. The honest questions most business owners avoid — but can't afford to.</div>
+            <div class="ind-footer">
+              <div class="ind-price">$15</div>
+              <a href="#" class="ind-buy">Buy</a>
+            </div>
+          </div>
+          <div class="ind-card">
+            <div class="ind-format">xlsx</div>
+            <div class="ind-name">Startup Cost Estimator</div>
+            <div class="ind-desc">Also included in the Financial Foundations Pack. 60+ line items, funding gap analysis, pre-launch checklist.</div>
+            <div class="ind-footer">
+              <div class="ind-price">$15</div>
+              <a href="#" class="ind-buy">Buy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="container">
+      <div class="faq-header">
+        <div class="section-label">Questions</div>
+        <h2 class="section-title">Common Questions</h2>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <div class="faq-q">What format do the templates come in?</div>
+          <div class="faq-a">All spreadsheets are .xlsx files compatible with both Microsoft Excel and Google Sheets. All documents are .docx files compatible with Microsoft Word and Google Docs. You receive a Google Drive "Make a copy" link — click it and the file is yours forever in your own Google Drive.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Do I need any special software?</div>
+          <div class="faq-a">No. A free Google account is all you need. Every template works in Google Sheets or Google Docs at no cost. If you prefer Microsoft Office, download the file and open it in Excel or Word.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">How do I receive my templates after purchase?</div>
+          <div class="faq-a">Immediately after checkout you'll receive an email with your Google Drive links. Click any link to make your own editable copy. No waiting, no shipping — instant access.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Can I use these for my clients?</div>
+          <div class="faq-a">Templates are licensed for personal and single-business use. If you're a consultant or advisor who wants to use them with multiple clients, contact us about a multi-use license.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">What if I only need one template?</div>
+          <div class="faq-a">Individual templates are available in the section above, starting at $15 each. That said — the packs at $49 give you 4–5 templates for the price of 2–3 individual purchases. Most buyers find the pack is the better value once they see what's included.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Are these templates really different from free ones online?</div>
+          <div class="faq-a">Yes. Free templates are designed to look good. These are built to be used — by someone who has actually run payroll, filed business taxes, onboarded clients, and managed cash flow. Every field, every formula, and every section exists for a real operational reason.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="bottom-cta">
+    <h2>Your Business Deserves<br><em>the Right Foundation.</em></h2>
+    <p>Start with the Complete Toolkit and have every essential document and spreadsheet in place before your first client, your first hire, or your first loan application.</p>
+    <div class="cta-row">
+      <a href="#bundles" class="btn-lg btn-gold">Get the Complete Toolkit — $129</a>
+      <a href="/#contact" class="btn-lg btn-outline">Talk to Us First</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-copy">© 2026 ARC Launchpad. All rights reserved. · Chicago, IL</div>
+      <ul class="footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/templates">Templates</a></li>
+        <li><a href="/#contact">Contact</a></li>
+        <li><a href="mailto:hello@arclaunchpad.com">hello@arclaunchpad.com</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>
