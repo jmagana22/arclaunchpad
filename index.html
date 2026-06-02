@@ -387,103 +387,256 @@
         }
 
         /* ─── Services ─────────────────────────────────────────────────── */
-        #services { background: var(--navy); }
-        #services .section-title { color: var(--white); }
-        #services .section-desc { color: rgba(247,245,242,0.6); }
+        #services {
+          background: var(--navy);
+          padding: 100px 24px;
+          color: var(--white);
+        }
+
+        .services-inner {
+          max-width: 1100px;
+          margin: 0 auto;
+        }
+
+        .section-header {
+          text-align: center;
+          margin-bottom: 64px;
+        }
+
+        .section-header h2 {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(2rem, 4vw, 3rem);
+          color: var(--white);
+          margin: 8px 0 16px;
+        }
+
+        .section-sub {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 1.05rem;
+          color: rgba(247,245,242,0.7);
+          max-width: 580px;
+          margin: 0 auto;
+          line-height: 1.6;
+        }
+
+        .track-block {
+          margin-bottom: 56px;
+        }
+
+        .track-label {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 24px;
+          flex-wrap: wrap;
+        }
+
+        .track-tag {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.7rem;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: var(--amber);
+          background: rgba(232,168,56,0.12);
+          border: 1px solid rgba(232,168,56,0.3);
+          padding: 3px 10px;
+          border-radius: 20px;
+        }
+
+        .track-name {
+          font-family: 'Playfair Display', serif;
+          font-size: 1.2rem;
+          color: var(--white);
+          font-weight: 600;
+        }
+
+        .track-desc {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.9rem;
+          color: rgba(247,245,242,0.55);
+        }
 
         .services-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 20px;
+        }
+
+        .services-grid--intel {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        @media (max-width: 900px) {
+          .services-grid,
+          .services-grid--intel {
+            grid-template-columns: 1fr;
+          }
         }
 
         .service-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 14px;
-            padding: 2rem 1.75rem;
-            position: relative;
-            transition: all 0.35s ease;
+          background: rgba(255,255,255,0.05);
+          border: 1px solid rgba(255,255,255,0.1);
+          border-radius: 12px;
+          padding: 28px 24px;
+          position: relative;
+          transition: border-color 0.2s, background 0.2s;
         }
+
         .service-card:hover {
-            background: rgba(255,255,255,0.09);
-            border-color: rgba(232,168,56,0.45);
-            transform: translateY(-7px);
-            box-shadow: 0 26px 60px rgba(0,0,0,0.32);
+          border-color: rgba(232,168,56,0.35);
+          background: rgba(255,255,255,0.07);
         }
+
         .service-card.popular {
-            border-color: var(--amber);
-            background: rgba(232,168,56,0.07);
+          border-color: rgba(232,168,56,0.5);
+          background: rgba(232,168,56,0.06);
         }
 
         .popular-badge {
-            position: absolute;
-            top: -13px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--amber);
-            color: var(--navy);
-            font-family: 'DM Mono', monospace;
-            font-size: 0.62rem;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            font-weight: 500;
-            padding: 0.28rem 0.9rem;
-            border-radius: 20px;
-            white-space: nowrap;
+          position: absolute;
+          top: -1px;
+          right: 20px;
+          background: var(--amber);
+          color: var(--navy-deep);
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.65rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          padding: 4px 12px;
+          border-radius: 0 0 8px 8px;
         }
 
-        .service-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.15rem;
-            color: var(--white);
-            margin-bottom: 0.5rem;
+        .card-top {
+          margin-bottom: 20px;
         }
 
-        .service-price {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.1rem;
-            font-weight: 700;
-            color: var(--amber);
-            margin-bottom: 0.2rem;
-        }
-        .service-price span {
-            font-size: 0.95rem;
-            color: rgba(247,245,242,0.45);
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 300;
+        .card-top h3 {
+          font-family: 'Playfair Display', serif;
+          font-size: 1.2rem;
+          color: var(--white);
+          margin: 0 0 6px;
         }
 
-        .service-timeline {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.68rem;
-            letter-spacing: 0.1em;
-            color: rgba(232,168,56,0.65);
-            text-transform: uppercase;
-            margin-bottom: 1.25rem;
+        .card-timeline {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.7rem;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: var(--amber);
+          margin: 0;
         }
 
-        .service-divider {
-            height: 1px;
-            background: rgba(255,255,255,0.09);
-            margin-bottom: 1.25rem;
+        .service-card ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          border-top: 1px solid rgba(255,255,255,0.08);
+          padding-top: 16px;
         }
 
-        .service-features { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
-        .service-features li {
-            font-size: 0.875rem;
-            color: rgba(247,245,242,0.72);
-            display: flex;
-            align-items: flex-start;
-            gap: 0.55rem;
-            line-height: 1.5;
+        .service-card ul li {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.88rem;
+          color: rgba(247,245,242,0.75);
+          padding: 5px 0;
+          padding-left: 16px;
+          position: relative;
+          line-height: 1.4;
         }
-        .service-features li::before {
-            content: '✓';
-            color: var(--amber);
-            font-size: 0.72rem;
-            flex-shrink: 0;
-            margin-top: 0.15em;
+
+        .service-card ul li::before {
+          content: '→';
+          position: absolute;
+          left: 0;
+          color: var(--amber);
+          font-size: 0.75rem;
+        }
+
+        .handoff-strip {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 20px;
+          background: var(--navy-deep);
+          border: 1px solid rgba(232,168,56,0.2);
+          border-radius: 12px;
+          padding: 24px 32px;
+          margin-top: 8px;
+          flex-wrap: wrap;
+        }
+
+        .handoff-text {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+
+        .handoff-label {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.65rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--amber);
+        }
+
+        .handoff-text strong {
+          font-family: 'Playfair Display', serif;
+          font-size: 1.1rem;
+          color: var(--white);
+        }
+
+        .handoff-text span {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.88rem;
+          color: rgba(247,245,242,0.6);
+          max-width: 560px;
+          line-height: 1.5;
+        }
+
+        .handoff-link {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.88rem;
+          font-weight: 600;
+          color: var(--amber);
+          text-decoration: none;
+          white-space: nowrap;
+          border: 1px solid rgba(232,168,56,0.4);
+          padding: 10px 20px;
+          border-radius: 6px;
+          transition: background 0.2s, color 0.2s;
+        }
+
+        .handoff-link:hover {
+          background: var(--amber);
+          color: var(--navy-deep);
+        }
+
+        .services-cta {
+          text-align: center;
+          margin-top: 48px;
+        }
+
+        .btn-pricing {
+          display: inline-block;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.95rem;
+          font-weight: 600;
+          color: var(--white);
+          border: 1.5px solid rgba(247,245,242,0.35);
+          padding: 14px 36px;
+          border-radius: 6px;
+          text-decoration: none;
+          letter-spacing: 0.02em;
+          transition: border-color 0.2s, background 0.2s;
+        }
+
+        .btn-pricing:hover {
+          border-color: var(--amber);
+          color: var(--amber);
         }
 
         /* ─── Case Studies ─────────────────────────────────────────────── */
@@ -704,10 +857,6 @@
         .reveal-d4 { transition-delay: 0.4s; }
 
         /* ─── Responsive ────────────────────────────────────────────────── */
-        @media (max-width: 1024px) {
-            .services-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -724,7 +873,6 @@
             .hamburger { display: flex; }
 
             .arc-grid { grid-template-columns: 1fr; }
-            .services-grid { grid-template-columns: 1fr; }
             .case-grid { grid-template-columns: 1fr; }
             .why-grid { grid-template-columns: 1fr; gap: 2rem; }
             section { padding: 4.5rem 1.5rem; }
@@ -750,6 +898,7 @@
         <li><a href="#services">Services</a></li>
         <li><a href="#case-studies">Work</a></li>
         <li><a href="/templates">Templates</a></li>
+        <li><a href="/pricing">Pricing</a></li>
         <li><a href="#why-us">Why Us</a></li>
         <li><a href="https://calendly.com/jmagana-arcmanagedit/arc-launchpad-discovery-call" class="nav-cta" target="_blank" rel="noopener noreferrer">Book a Call</a></li>
     </ul>
@@ -839,79 +988,144 @@
 
 <!-- ════ SERVICES ════════════════════════════════════════════════════════ -->
 <section id="services">
-    <div class="section-inner">
-        <span class="section-label label">Pricing</span>
-        <h2 class="section-title reveal">Service Packages</h2>
-        <p class="section-desc reveal reveal-d1">
-            Fixed-scope packages with clear deliverables and timelines. No hourly billing, no scope creep, no surprises.
-        </p>
+  <div class="services-inner">
 
-        <div class="services-grid">
-            <!-- Vision Starter -->
-            <div class="service-card reveal reveal-d1">
-                <p class="service-name">Vision Starter</p>
-                <p class="service-price">$750</p>
-                <p class="service-timeline">3–5 business days</p>
-                <div class="service-divider"></div>
-                <ul class="service-features">
-                    <li>Discovery call &amp; brand brief</li>
-                    <li>Logo mark (2 concepts)</li>
-                    <li>Color palette &amp; typography</li>
-                    <li>Brand style guide (PDF)</li>
-                    <li>Social profile assets</li>
-                </ul>
-            </div>
-
-            <!-- Brand Launch Kit -->
-            <div class="service-card reveal reveal-d2">
-                <p class="service-name">Brand Launch Kit</p>
-                <p class="service-price">$2,500</p>
-                <p class="service-timeline">7–10 business days</p>
-                <div class="service-divider"></div>
-                <ul class="service-features">
-                    <li>Everything in Vision Starter</li>
-                    <li>Full logo suite &amp; variations</li>
-                    <li>Brand voice &amp; messaging guide</li>
-                    <li>Business card &amp; letterhead</li>
-                    <li>Website blueprint &amp; copy</li>
-                    <li>Domain &amp; email setup</li>
-                </ul>
-            </div>
-
-            <!-- Vision-to-Launch (Most Popular) -->
-            <div class="service-card popular reveal reveal-d3">
-                <div class="popular-badge">Most Popular</div>
-                <p class="service-name">Vision-to-Launch</p>
-                <p class="service-price">$5,500</p>
-                <p class="service-timeline">2–3 weeks</p>
-                <div class="service-divider"></div>
-                <ul class="service-features">
-                    <li>Everything in Brand Launch Kit</li>
-                    <li>5-page website blueprint &amp; design spec</li>
-                    <li>Mobile-first layout &amp; responsive spec</li>
-                    <li>SEO foundations &amp; meta setup</li>
-                    <li>Google Analytics &amp; Search Console</li>
-                    <li>30-day post-handoff support</li>
-                    <li>Full asset, spec &amp; credential handoff</li>
-                </ul>
-            </div>
-
-            <!-- Brand Support Retainer -->
-            <div class="service-card reveal reveal-d4">
-                <p class="service-name">Brand Support Retainer</p>
-                <p class="service-price">$1,000<span>/mo</span></p>
-                <p class="service-timeline">Ongoing · Monthly</p>
-                <div class="service-divider"></div>
-                <ul class="service-features">
-                    <li>4 hrs design or dev updates</li>
-                    <li>Monthly website maintenance</li>
-                    <li>Content &amp; copy refreshes</li>
-                    <li>Performance &amp; uptime monitoring</li>
-                    <li>Priority response time</li>
-                </ul>
-            </div>
-        </div>
+    <div class="section-header">
+      <span class="section-label">WHAT WE BUILD</span>
+      <h2>Service Packages</h2>
+      <p class="section-sub">Two tracks. One framework. Everything your business needs to launch, grow, and operate with confidence.</p>
     </div>
+
+    <!-- Track 1 -->
+    <div class="track-block">
+      <div class="track-label">
+        <span class="track-tag">Track 1</span>
+        <span class="track-name">Vision &amp; Brand</span>
+        <span class="track-desc">We build your brand identity and digital foundation.</span>
+      </div>
+      <div class="services-grid">
+
+        <div class="service-card reveal reveal-d1">
+          <div class="card-top">
+            <h3>Vision Starter</h3>
+            <p class="card-timeline">3–5 business days</p>
+          </div>
+          <ul>
+            <li>Discovery call &amp; brand brief</li>
+            <li>Logo mark (2 concepts)</li>
+            <li>Color palette &amp; typography</li>
+            <li>Brand style guide (PDF)</li>
+            <li>Social profile assets</li>
+          </ul>
+        </div>
+
+        <div class="service-card reveal reveal-d2">
+          <div class="card-top">
+            <h3>Brand Launch Kit</h3>
+            <p class="card-timeline">7–10 business days</p>
+          </div>
+          <ul>
+            <li>Everything in Vision Starter</li>
+            <li>Full logo suite &amp; variations</li>
+            <li>Brand voice &amp; messaging guide</li>
+            <li>Business card &amp; letterhead</li>
+            <li>Website blueprint &amp; copy</li>
+            <li>Domain &amp; email setup</li>
+          </ul>
+        </div>
+
+        <div class="service-card popular reveal reveal-d3">
+          <div class="popular-badge">Most Complete</div>
+          <div class="card-top">
+            <h3>Vision-to-Launch</h3>
+            <p class="card-timeline">2–3 weeks</p>
+          </div>
+          <ul>
+            <li>Everything in Brand Launch Kit</li>
+            <li>5-page website blueprint &amp; design spec</li>
+            <li>Mobile-first layout &amp; responsive spec</li>
+            <li>SEO foundations &amp; meta setup</li>
+            <li>Google Analytics &amp; Search Console</li>
+            <li>30-day post-handoff support</li>
+            <li>Full asset, spec &amp; credential handoff</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Track 2 -->
+    <div class="track-block">
+      <div class="track-label">
+        <span class="track-tag">Track 2</span>
+        <span class="track-name">ARC Intelligence</span>
+        <span class="track-desc">A complete business strategy package. Two calls. 7–10 day delivery.</span>
+      </div>
+      <div class="services-grid services-grid--intel">
+
+        <div class="service-card reveal reveal-d1">
+          <div class="card-top">
+            <h3>Intelligence Core</h3>
+            <p class="card-timeline">7–10 business days</p>
+          </div>
+          <ul>
+            <li>Business strategy &amp; market positioning</li>
+            <li>Financial model &amp; break-even analysis</li>
+            <li>Lead-to-close sales system</li>
+            <li>90-day execution roadmap</li>
+            <li>Launch Readiness Score</li>
+          </ul>
+        </div>
+
+        <div class="service-card popular reveal reveal-d2">
+          <div class="popular-badge">Recommended</div>
+          <div class="card-top">
+            <h3>Intelligence Full</h3>
+            <p class="card-timeline">7–10 business days</p>
+          </div>
+          <ul>
+            <li>Everything in Intelligence Core</li>
+            <li>Operations &amp; SOP framework</li>
+            <li>Brand identity system (if needed)</li>
+            <li>Risk register &amp; assumption log</li>
+            <li>Professional review checklist</li>
+            <li>13-section launch package</li>
+          </ul>
+        </div>
+
+        <div class="service-card reveal reveal-d3">
+          <div class="card-top">
+            <h3>Standalone Modules</h3>
+            <p class="card-timeline">3–5 business days</p>
+          </div>
+          <ul>
+            <li>ARC SalesFlow — sales system build</li>
+            <li>ARC Financial Review — cash flow &amp; margins</li>
+            <li>ARC Strategy Session — market &amp; roadmap</li>
+            <li>ARC Operations Build — SOPs &amp; workflows</li>
+            <li>ARC Acquisition Screen — deal analysis</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ARC Tech handoff strip -->
+    <div class="handoff-strip reveal">
+      <div class="handoff-text">
+        <span class="handoff-label">AFTER LAUNCH</span>
+        <strong>ARC Tech Managed IT</strong>
+        <span>Devices, security, helpdesk, and ongoing technology management. One relationship from brand to IT.</span>
+      </div>
+      <a href="https://arcmanagedit.com" class="handoff-link" target="_blank" rel="noopener noreferrer">Learn more →</a>
+    </div>
+
+    <!-- Pricing CTA -->
+    <div class="services-cta">
+      <a href="/pricing" class="btn-pricing">See Full Pricing</a>
+    </div>
+
+  </div>
 </section>
 
 

@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing — ARC Launchpad</title>
+  <meta name="description" content="Transparent, fixed-scope pricing for every stage of your business launch. Vision & Brand from $750. ARC Intelligence from $7,000.">
+  <link rel="icon" type="image/png" href="arc-launchpad-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1B2E4B;
+      --navy-deep: #111928;
+      --navy-light: #253d63;
+      --amber: #E8A838;
+      --amber-dark: #C8891C;
+      --white: #F7F5F2;
+      --charcoal: #2C2C2C;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--charcoal);
+    }
+
+    /* ---- NAV ---- */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid rgba(27,46,75,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 72px;
+    }
+
+    .nav-logo img { height: 48px; display: block; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--navy);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--amber-dark); }
+
+    .nav-links .nav-cta {
+      background: var(--amber);
+      color: var(--navy-deep);
+      padding: 10px 22px;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .nav-links .nav-cta:hover { background: var(--amber-dark); color: var(--white); }
+
+    /* ---- PAGE HERO ---- */
+    .page-hero {
+      background: var(--navy);
+      padding: 80px 24px 72px;
+      text-align: center;
+    }
+
+    .page-hero .section-label {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 16px;
+    }
+
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      color: var(--white);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .page-hero p {
+      font-size: 1rem;
+      color: rgba(247,245,242,0.7);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+
+    /* ---- MAIN CONTENT ---- */
+    main { max-width: 1100px; margin: 0 auto; padding: 0 24px 100px; }
+
+    /* ---- SECTION LABELS ---- */
+    .pricing-section { margin-top: 72px; }
+
+    .pricing-section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(27,46,75,0.12);
+      flex-wrap: wrap;
+    }
+
+    .track-pill {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--amber-dark);
+      background: rgba(232,168,56,0.12);
+      border: 1px solid rgba(232,168,56,0.3);
+      padding: 3px 12px;
+      border-radius: 20px;
+    }
+
+    .pricing-section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    .pricing-section-header p {
+      font-size: 0.88rem;
+      color: rgba(44,44,44,0.6);
+      margin-left: auto;
+    }
+
+    /* ---- CARD GRIDS ---- */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .cards-grid--2 { grid-template-columns: repeat(2, 1fr); }
+    .cards-grid--5 { grid-template-columns: repeat(5, 1fr); }
+
+    @media (max-width: 960px) {
+      .cards-grid, .cards-grid--2, .cards-grid--5 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .cards-grid, .cards-grid--2, .cards-grid--5 {
+        grid-template-columns: 1fr;
+      }
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+    }
+
+    /* ---- PRICING CARDS ---- */
+    .p-card {
+      background: #fff;
+      border: 1px solid rgba(27,46,75,0.12);
+      border-radius: 12px;
+      padding: 28px 24px;
+      position: relative;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .p-card:hover {
+      border-color: rgba(232,168,56,0.4);
+      box-shadow: 0 4px 20px rgba(27,46,75,0.07);
+    }
+
+    .p-card.featured {
+      border-color: var(--amber);
+      border-width: 2px;
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: -1px;
+      right: 20px;
+      background: var(--amber);
+      color: var(--navy-deep);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .p-card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .p-card-price {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--navy-deep);
+      margin: 10px 0 4px;
+      line-height: 1;
+    }
+
+    .p-card-price sup {
+      font-size: 1rem;
+      vertical-align: top;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .p-card-price .per { font-size: 0.85rem; font-weight: 400; color: rgba(44,44,44,0.5); }
+
+    .p-card-timeline {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--amber-dark);
+      margin-bottom: 18px;
+    }
+
+    .p-card ul {
+      list-style: none;
+      border-top: 1px solid rgba(27,46,75,0.08);
+      padding-top: 16px;
+    }
+
+    .p-card ul li {
+      font-size: 0.85rem;
+      color: rgba(44,44,44,0.75);
+      padding: 4px 0 4px 16px;
+      position: relative;
+      line-height: 1.4;
+    }
+
+    .p-card ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--amber-dark);
+      font-size: 0.72rem;
+    }
+
+    .p-card-desc {
+      font-size: 0.83rem;
+      color: rgba(44,44,44,0.55);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    /* Compact module cards */
+    .p-card.compact .p-card-price { font-size: 1.5rem; }
+    .p-card.compact .p-card-name { font-size: 0.95rem; }
+    .p-card.compact ul li { font-size: 0.8rem; }
+
+    /* ---- BUNDLE CARD ---- */
+    .bundle-card {
+      background: var(--navy);
+      border-radius: 12px;
+      padding: 32px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .bundle-card-left {}
+    .bundle-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 8px;
+    }
+
+    .bundle-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .bundle-card p {
+      font-size: 0.88rem;
+      color: rgba(247,245,242,0.65);
+      max-width: 480px;
+      line-height: 1.55;
+    }
+
+    .bundle-price {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .bundle-price .amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      color: var(--white);
+      font-weight: 600;
+      display: block;
+    }
+
+    .bundle-price .save {
+      font-size: 0.78rem;
+      color: var(--amber);
+      font-weight: 500;
+    }
+
+    /* ---- HANDOFF STRIP ---- */
+    .handoff-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      background: var(--navy-deep);
+      border: 1px solid rgba(232,168,56,0.2);
+      border-radius: 12px;
+      padding: 28px 36px;
+      margin-top: 72px;
+      flex-wrap: wrap;
+    }
+
+    .handoff-text { display: flex; flex-direction: column; gap: 5px; }
+
+    .handoff-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+
+    .handoff-text strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--white);
+    }
+
+    .handoff-text span {
+      font-size: 0.88rem;
+      color: rgba(247,245,242,0.6);
+      max-width: 520px;
+      line-height: 1.55;
+    }
+
+    .handoff-link {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--amber);
+      text-decoration: none;
+      border: 1px solid rgba(232,168,56,0.4);
+      padding: 12px 24px;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .handoff-link:hover {
+      background: var(--amber);
+      color: var(--navy-deep);
+    }
+
+    /* ---- BOTTOM CTA ---- */
+    .bottom-cta {
+      background: var(--navy);
+      border-radius: 12px;
+      padding: 60px 40px;
+      text-align: center;
+      margin-top: 72px;
+    }
+
+    .bottom-cta p.label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 14px;
+    }
+
+    .bottom-cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+
+    .bottom-cta h2 em { color: var(--amber); font-style: italic; }
+
+    .bottom-cta p.sub {
+      font-size: 0.95rem;
+      color: rgba(247,245,242,0.65);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--amber);
+      color: var(--navy-deep);
+      font-weight: 700;
+      font-size: 0.92rem;
+      padding: 14px 32px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover { background: var(--amber-dark); color: var(--white); }
+
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(247,245,242,0.35);
+      font-weight: 500;
+      font-size: 0.92rem;
+      padding: 14px 32px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-secondary:hover { border-color: var(--amber); color: var(--amber); }
+
+    /* ---- FOOTER ---- */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 0.82rem;
+      color: rgba(44,44,44,0.45);
+    }
+
+    footer a { color: var(--navy); text-decoration: none; }
+    footer a:hover { color: var(--amber-dark); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="arc-launchpad-logo.png" alt="ARC Launchpad" height="48">
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#how-it-works">Process</a></li>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#case-studies">Work</a></li>
+      <li><a href="/templates">Templates</a></li>
+      <li><a href="/pricing" style="color:var(--amber-dark);font-weight:600;">Pricing</a></li>
+      <li><a href="/#why-us">Why Us</a></li>
+      <li>
+        <a href="https://calendly.com/jmagana-arcmanagedit/arc-launchpad-discovery-call"
+           class="nav-cta" target="_blank" rel="noopener noreferrer">Book a Call</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <span class="section-label">Transparent Pricing</span>
+    <h1>Fixed scope. Clear deliverables.<br>No surprises.</h1>
+    <p>Every engagement has a defined scope, a set price, and a clear timeline. What's quoted is what you pay.</p>
+  </div>
+
+  <main>
+
+    <!-- ===================== TRACK 1 ===================== -->
+    <section class="pricing-section">
+      <div class="pricing-section-header">
+        <span class="track-pill">Track 1</span>
+        <h2>Vision &amp; Brand</h2>
+        <p>We build your brand identity and digital foundation.</p>
+      </div>
+
+      <div class="cards-grid">
+
+        <div class="p-card">
+          <p class="p-card-name">Vision Starter</p>
+          <div class="p-card-price"><sup>$</sup>750</div>
+          <p class="p-card-timeline">3–5 business days</p>
+          <ul>
+            <li>Discovery call &amp; brand brief</li>
+            <li>Logo mark (2 concepts)</li>
+            <li>Color palette &amp; typography</li>
+            <li>Brand style guide (PDF)</li>
+            <li>Social profile assets</li>
+          </ul>
+        </div>
+
+        <div class="p-card">
+          <p class="p-card-name">Brand Launch Kit</p>
+          <div class="p-card-price"><sup>$</sup>2,500</div>
+          <p class="p-card-timeline">7–10 business days</p>
+          <ul>
+            <li>Everything in Vision Starter</li>
+            <li>Full logo suite &amp; variations</li>
+            <li>Brand voice &amp; messaging guide</li>
+            <li>Business card &amp; letterhead</li>
+            <li>Website blueprint &amp; copy</li>
+            <li>Domain &amp; email setup</li>
+          </ul>
+        </div>
+
+        <div class="p-card featured">
+          <span class="featured-badge">Most Complete</span>
+          <p class="p-card-name">Vision-to-Launch</p>
+          <div class="p-card-price"><sup>$</sup>5,500</div>
+          <p class="p-card-timeline">2–3 weeks</p>
+          <ul>
+            <li>Everything in Brand Launch Kit</li>
+            <li>5-page website blueprint &amp; design spec</li>
+            <li>Mobile-first layout &amp; responsive spec</li>
+            <li>SEO foundations &amp; meta setup</li>
+            <li>Google Analytics &amp; Search Console</li>
+            <li>30-day post-handoff support</li>
+            <li>Full asset, spec &amp; credential handoff</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== STANDALONE MODULES ===================== -->
+    <section class="pricing-section">
+      <div class="pricing-section-header">
+        <span class="track-pill">Standalone</span>
+        <h2>ARC Intelligence — Single Focus</h2>
+        <p>One call. One module. One deliverable.</p>
+      </div>
+
+      <div class="cards-grid--5" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;">
+
+        <div class="p-card compact">
+          <p class="p-card-name">ARC SalesFlow</p>
+          <div class="p-card-price"><sup>$</sup>1,500</div>
+          <p class="p-card-timeline">3–5 business days</p>
+          <ul>
+            <li>Lead-to-close pipeline</li>
+            <li>Follow-up sequences</li>
+            <li>Quote template</li>
+            <li>Review request system</li>
+          </ul>
+        </div>
+
+        <div class="p-card compact">
+          <p class="p-card-name">ARC Financial Review</p>
+          <div class="p-card-price"><sup>$</sup>1,750</div>
+          <p class="p-card-timeline">3–5 business days</p>
+          <ul>
+            <li>Cash flow analysis</li>
+            <li>Pricing validation</li>
+            <li>Break-even model</li>
+            <li>Margin assessment</li>
+          </ul>
+        </div>
+
+        <div class="p-card compact">
+          <p class="p-card-name">ARC Strategy Session</p>
+          <div class="p-card-price"><sup>$</sup>2,000</div>
+          <p class="p-card-timeline">3–5 business days</p>
+          <ul>
+            <li>Market positioning</li>
+            <li>Competitive landscape</li>
+            <li>Go-to-market plan</li>
+            <li>90-day roadmap</li>
+          </ul>
+        </div>
+
+        <div class="p-card compact">
+          <p class="p-card-name">ARC Operations Build</p>
+          <div class="p-card-price"><sup>$</sup>1,750</div>
+          <p class="p-card-timeline">3–5 business days</p>
+          <ul>
+            <li>Core SOPs documented</li>
+            <li>Workflow map</li>
+            <li>Role/responsibility matrix</li>
+            <li>Quality control checklist</li>
+          </ul>
+        </div>
+
+        <div class="p-card compact">
+          <p class="p-card-name">ARC Acquisition Screen</p>
+          <div class="p-card-price"><sup>$</sup>3,500</div>
+          <p class="p-card-timeline">3–5 business days</p>
+          <ul>
+            <li>Deal analysis &amp; normalized earnings</li>
+            <li>DSCR &amp; buyer cash flow</li>
+            <li>Risk register</li>
+            <li>Go / no-go recommendation</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== TRACK 2 ===================== -->
+    <section class="pricing-section">
+      <div class="pricing-section-header">
+        <span class="track-pill">Track 2</span>
+        <h2>ARC Intelligence — Full Engagement</h2>
+        <p>Two calls. Your work in between. Complete business strategy package.</p>
+      </div>
+
+      <div class="cards-grid cards-grid--2">
+
+        <div class="p-card">
+          <p class="p-card-name">Intelligence Core</p>
+          <div class="p-card-price"><sup>$</sup>7,000</div>
+          <p class="p-card-timeline">7–10 business days</p>
+          <ul>
+            <li>Business strategy &amp; market analysis</li>
+            <li>Financial model &amp; break-even</li>
+            <li>Lead-to-close sales system</li>
+            <li>90-day execution roadmap</li>
+            <li>Launch Readiness Score</li>
+            <li>One round of revisions included</li>
+          </ul>
+        </div>
+
+        <div class="p-card featured">
+          <span class="featured-badge">Recommended</span>
+          <p class="p-card-name">Intelligence Full</p>
+          <div class="p-card-price"><sup>$</sup>10,000</div>
+          <p class="p-card-timeline">7–10 business days</p>
+          <ul>
+            <li>Everything in Intelligence Core</li>
+            <li>Operations &amp; SOP framework</li>
+            <li>Brand identity system (if no brand)</li>
+            <li>Risk register &amp; assumption log</li>
+            <li>Professional review checklist</li>
+            <li>13-section launch package</li>
+            <li>One round of revisions included</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Bundle card -->
+      <div class="bundle-card">
+        <div class="bundle-card-left">
+          <p class="bundle-label">Best Value Bundle</p>
+          <h3>Vision-to-Launch + Intelligence Core</h3>
+          <p>Brand identity and business strategy in one engagement. Everything you need to launch with confidence — brand, financials, sales system, and a 90-day roadmap.</p>
+        </div>
+        <div class="bundle-price">
+          <span class="amount">$11,500</span>
+          <span class="save">Save $1,000 vs. separate</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ARC TECH HANDOFF ===================== -->
+    <div class="handoff-strip">
+      <div class="handoff-text">
+        <span class="handoff-label">After Launch</span>
+        <strong>ARC Tech Managed IT</strong>
+        <span>Devices, security, helpdesk, and ongoing technology management. ARC Launchpad builds your foundation. ARC Tech keeps it running. One relationship from brand to IT.</span>
+      </div>
+      <a href="https://arcmanagedit.com" class="handoff-link" target="_blank" rel="noopener noreferrer">
+        Learn about ARC Tech →
+      </a>
+    </div>
+
+    <!-- ===================== BOTTOM CTA ===================== -->
+    <div class="bottom-cta">
+      <p class="label">Get Started</p>
+      <h2>Ready to <em>Launch?</em></h2>
+      <p class="sub">Book a free 30-minute discovery call or fill out the intake form<br>and we'll reach out within one business day.</p>
+      <div class="cta-buttons">
+        <a href="https://calendly.com/jmagana-arcmanagedit/arc-launchpad-discovery-call"
+           class="btn-primary" target="_blank" rel="noopener noreferrer">Book a Free Discovery Call</a>
+        <a href="/#cta" class="btn-secondary">Start with the Intake Form</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>© 2025 ARC Launchpad · <a href="/">arclaunchpad.com</a> · hello@arclaunchpad.com</p>
+  </footer>
+
+</body>
+</html>
