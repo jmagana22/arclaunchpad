@@ -73,6 +73,27 @@
 
     .nav-links .nav-cta:hover { background: var(--amber-dark); color: var(--white); }
 
+    /* hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--navy);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
     /* ---- PAGE HERO ---- */
     .page-hero {
       background: var(--navy);
@@ -167,8 +188,22 @@
       .cards-grid, .cards-grid--2, .cards-grid--5 {
         grid-template-columns: 1fr;
       }
-      nav { padding: 0 20px; }
-      .nav-links { display: none; }
+      nav { padding: 0 20px; position: relative; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: rgba(17,25,40,0.97);
+        backdrop-filter: blur(14px);
+        flex-direction: column;
+        padding: 1.5rem 2rem;
+        gap: 1.25rem;
+        border-top: 1px solid rgba(255,255,255,0.08);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { color: #ffffff !important; }
+      .nav-links a:not(.nav-cta):hover { color: var(--amber) !important; }
+      .hamburger { display: flex; }
     }
 
     /* ---- PRICING CARDS ---- */
@@ -467,7 +502,7 @@
     <a href="/" class="nav-logo">
       <img src="arc-launchpad-logo.png" alt="ARC Launchpad" height="48">
     </a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="navLinks">
       <li><a href="/#how-it-works">Process</a></li>
       <li><a href="/#services">Services</a></li>
       <li><a href="/#case-studies">Work</a></li>
@@ -479,6 +514,9 @@
            class="nav-cta" target="_blank" rel="noopener noreferrer">Book a Call</a>
       </li>
     </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- PAGE HERO -->
@@ -705,5 +743,21 @@
     <p>© 2025 ARC Launchpad · <a href="/">arclaunchpad.com</a> · hello@arclaunchpad.com</p>
   </footer>
 
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    hamburger.classList.toggle('active', open);
+    hamburger.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
 </body>
 </html>

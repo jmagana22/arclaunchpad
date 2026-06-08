@@ -104,6 +104,27 @@
 
     .nav-cta:hover { background: var(--gold-light) !important; color: var(--navy) !important; }
 
+    /* hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
     /* ── HERO ────────────────────────────────────────────────────────── */
     .hero {
       padding: 160px 40px 100px;
@@ -789,7 +810,21 @@
     /* ── RESPONSIVE ──────────────────────────────────────────────────── */
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
-      .nav-links { display: none; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: rgba(15,30,58,0.97);
+        backdrop-filter: blur(14px);
+        flex-direction: column;
+        padding: 1.5rem 2rem;
+        gap: 1.25rem;
+        border-top: 1px solid rgba(255,255,255,0.08);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { color: #ffffff !important; }
+      .nav-links a:not(.nav-cta):hover { color: var(--gold) !important; }
+      .hamburger { display: flex; }
       section { padding: 72px 20px; }
       .hero { padding: 120px 20px 80px; }
       .bundles-header { margin-bottom: 40px; }
@@ -814,7 +849,7 @@
           <path d="M18 14L25 28H11L18 14Z" fill="#c9973a" opacity="0.4"/>
         </svg>
       </a>
-      <ul class="nav-links">
+      <ul class="nav-links" id="navLinks">
         <li><a href="/#process">Process</a></li>
         <li><a href="/#services">Services</a></li>
         <li><a href="/#work">Work</a></li>
@@ -822,6 +857,9 @@
         <li><a href="/#why">Why Us</a></li>
         <li><a href="/#contact" class="nav-cta">Book a Call</a></li>
       </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
@@ -1188,5 +1226,21 @@
     </div>
   </footer>
 
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    hamburger.classList.toggle('active', open);
+    hamburger.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
 </body>
 </html>
