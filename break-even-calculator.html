@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Break-Even Calculator — ARC Launchpad</title>
+  <meta name="description" content="Know your number in 60 seconds. Free break-even calculator for small business owners — no signup required to calculate." />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1B2E4B;
+      --navy-light: #243d63;
+      --amber: #E8A838;
+      --amber-light: #f5c060;
+      --cream: #F7F5F2;
+      --cream-dark: #ede9e3;
+      --text: #1B2E4B;
+      --text-muted: #6b7a8d;
+      --success: #2a7a4b;
+      --success-bg: #eaf5ee;
+      --border: #d9d3ca;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--navy);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      color: var(--white);
+      font-size: 1.15rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .nav-logo span {
+      color: var(--amber);
+    }
+    .nav-link {
+      color: var(--cream);
+      font-size: 0.85rem;
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    .nav-link:hover { opacity: 1; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--navy);
+      color: var(--white);
+      padding: 3.5rem 2rem 3rem;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(232,168,56,0.15);
+      color: var(--amber);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem;
+      border-radius: 2rem;
+      margin-bottom: 1.25rem;
+      border: 1px solid rgba(232,168,56,0.3);
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.15;
+      max-width: 640px;
+      margin: 0 auto 1rem;
+    }
+    .hero h1 em {
+      color: var(--amber);
+      font-style: normal;
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: rgba(247,245,242,0.75);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .page-body {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    /* ── CALCULATOR CARD ── */
+    .calc-card {
+      background: var(--white);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(27,46,75,0.08);
+    }
+    .calc-header {
+      background: var(--cream-dark);
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .calc-header-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--navy);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .calc-header-icon svg { width: 18px; height: 18px; fill: var(--amber); }
+    .calc-header-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--navy);
+    }
+    .calc-header-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.1rem;
+    }
+
+    .calc-body { padding: 1.75rem; }
+
+    .input-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .field label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.45rem;
+    }
+    .input-wrap {
+      position: relative;
+    }
+    .input-wrap .prefix {
+      position: absolute;
+      left: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+    .input-wrap input {
+      width: 100%;
+      padding: 0.7rem 0.85rem 0.7rem 1.75rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      color: var(--text);
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      border-radius: 7px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .input-wrap input:focus {
+      border-color: var(--amber);
+      box-shadow: 0 0 0 3px rgba(232,168,56,0.15);
+      background: var(--white);
+    }
+    .input-wrap input::placeholder { color: #bbb; }
+
+    /* ── RESULT ── */
+    .result-box {
+      background: var(--navy);
+      border-radius: 10px;
+      padding: 1.5rem 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .result-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(247,245,242,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.35rem;
+    }
+    .result-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      color: var(--amber);
+      line-height: 1;
+    }
+    .result-unit {
+      font-size: 0.85rem;
+      color: rgba(247,245,242,0.55);
+      margin-top: 0.25rem;
+    }
+    .result-metrics {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .metric { text-align: right; }
+    .metric-label {
+      font-size: 0.72rem;
+      color: rgba(247,245,242,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.2rem;
+    }
+    .metric-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .result-empty {
+      color: rgba(247,245,242,0.35);
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    /* ── GATE SECTION ── */
+    .gate-section { }
+    .gate-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+    .gate-sub {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .template-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.65rem;
+      margin-bottom: 1.5rem;
+    }
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .feature-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--amber);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 0.4rem;
+    }
+
+    /* email form */
+    .email-form {
+      display: flex;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+    .email-form input[type="email"] {
+      flex: 1;
+      min-width: 220px;
+      padding: 0.75rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text);
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      border-radius: 7px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .email-form input[type="email"]:focus {
+      border-color: var(--amber);
+      box-shadow: 0 0 0 3px rgba(232,168,56,0.15);
+      background: var(--white);
+    }
+    .btn-primary {
+      padding: 0.75rem 1.5rem;
+      background: var(--amber);
+      color: var(--navy);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 7px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-primary:hover { background: var(--amber-light); }
+    .btn-primary:active { transform: scale(0.98); }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .form-note {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-top: 0.6rem;
+    }
+
+    /* ── SUCCESS STATE ── */
+    .success-box {
+      display: none;
+      background: var(--success-bg);
+      border: 1.5px solid #b2d9c0;
+      border-radius: 10px;
+      padding: 1.5rem 1.75rem;
+    }
+    .success-box.visible { display: block; }
+    .success-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--success);
+      margin-bottom: 0.4rem;
+    }
+    .success-sub {
+      font-size: 0.9rem;
+      color: #3a6b4f;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.35rem;
+      background: var(--success);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 7px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-download:hover { background: #235f3b; }
+    .btn-download svg { width: 16px; height: 16px; fill: currentColor; }
+
+    /* ── FOOTER UPSELL ── */
+    .upsell-strip {
+      margin-top: 2rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      box-shadow: 0 1px 8px rgba(27,46,75,0.05);
+    }
+    .upsell-text {}
+    .upsell-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--amber);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.3rem;
+    }
+    .upsell-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+    }
+    .upsell-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .btn-outline {
+      padding: 0.65rem 1.3rem;
+      background: transparent;
+      color: var(--navy);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border: 2px solid var(--navy);
+      border-radius: 7px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { background: var(--navy); color: var(--white); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--navy); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 520px) {
+      .result-box { flex-direction: column; align-items: flex-start; }
+      .result-metrics { gap: 1rem; }
+      .metric { text-align: left; }
+      .upsell-strip { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">ARC <span>Launchpad</span></a>
+  <a href="/templates" class="nav-link">Template Store →</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Free Tool</div>
+  <h1>Know your <em>break-even number</em> in 60 seconds</h1>
+  <p class="hero-sub">Enter three numbers. See exactly how many sales you need to cover your costs — no spreadsheet experience required.</p>
+</div>
+
+<div class="page-body">
+
+  <!-- CALCULATOR CARD -->
+  <div class="calc-card">
+    <div class="calc-header">
+      <div class="calc-header-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 2a1 1 0 0 0-1 1v18a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H7zm1 2h8v16H8V4zm1 2v2h6V6H9zm0 4v2h2v-2H9zm4 0v2h2v-2h-2zm-4 4v2h2v-2H9zm4 0v2h2v-2h-2z"/></svg>
+      </div>
+      <div>
+        <div class="calc-header-title">Break-Even Calculator</div>
+        <div class="calc-header-sub">Fixed costs · price per unit · variable cost per unit</div>
+      </div>
+    </div>
+
+    <div class="calc-body">
+      <div class="input-grid">
+        <div class="field">
+          <label>Monthly Fixed Costs</label>
+          <div class="input-wrap">
+            <span class="prefix">$</span>
+            <input type="number" id="fixed" min="0" placeholder="e.g. 3000" oninput="calculate()" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Price Per Unit / Sale</label>
+          <div class="input-wrap">
+            <span class="prefix">$</span>
+            <input type="number" id="price" min="0" placeholder="e.g. 150" oninput="calculate()" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Variable Cost Per Unit</label>
+          <div class="input-wrap">
+            <span class="prefix">$</span>
+            <input type="number" id="variable" min="0" placeholder="e.g. 40" oninput="calculate()" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Result -->
+      <div class="result-box" id="resultBox">
+        <div>
+          <div class="result-label">Break-Even Point</div>
+          <div class="result-number" id="beUnits"><span class="result-empty">Enter your numbers above</span></div>
+          <div class="result-unit" id="beUnitLabel"></div>
+        </div>
+        <div class="result-metrics" id="resultMetrics" style="display:none">
+          <div class="metric">
+            <div class="metric-label">Break-Even Revenue</div>
+            <div class="metric-value" id="beRevenue">—</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Contribution Margin</div>
+            <div class="metric-value" id="beMargin">—</div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="section-divider" />
+
+      <!-- GATE -->
+      <div class="gate-section">
+        <div class="gate-heading">Get the full 4-tab template — free</div>
+        <div class="gate-sub">The complete Break-Even Calculator includes a scenario planner, annual projection tracker, and margin analysis tab. Built in Google Sheets, editable instantly.</div>
+
+        <div class="template-features">
+          <div class="feature-item"><span class="feature-dot"></span>Scenario planner — compare 3 pricing models side by side</div>
+          <div class="feature-item"><span class="feature-dot"></span>Annual projection tracker — 12-month visual chart</div>
+          <div class="feature-item"><span class="feature-dot"></span>Margin analysis — contribution margin by product line</div>
+          <div class="feature-item"><span class="feature-dot"></span>Pre-built formulas — no setup, open and use</div>
+        </div>
+
+        <!-- Email form (shown until submitted) -->
+        <div id="emailFormWrap">
+          <div class="email-form">
+            <input type="email" id="emailInput" placeholder="your@email.com" />
+            <button class="btn-primary" id="submitBtn" onclick="submitEmail()">Send Me the Template</button>
+          </div>
+          <p class="form-note">No spam. One email with your template link — that's it.</p>
+        </div>
+
+        <!-- Success state (hidden until submitted) -->
+        <div class="success-box" id="successBox">
+          <div class="success-title">Your template is ready</div>
+          <div class="success-sub">Click below to open your own editable copy in Google Sheets. No account needed beyond Google.</div>
+          <a href="https://docs.google.com/spreadsheets/d/1KEVVQCHb3ongaHLXBHXpVtwFBbU2iuMFB0EyHyRedkE/copy" target="_blank" class="btn-download">
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Open in Google Sheets
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UPSELL STRIP -->
+  <div class="upsell-strip">
+    <div class="upsell-text">
+      <div class="upsell-label">Financial Foundations Pack — $49</div>
+      <div class="upsell-title">Cash Flow, P&amp;L Tracker, Startup Cost Estimator + more</div>
+      <div class="upsell-desc">4 templates. 700+ pre-built formulas. Built by a 20-year IT executive who has done the math himself.</div>
+    </div>
+    <a href="/templates" class="btn-outline">See All Templates →</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2025 <a href="/">ARC Launchpad</a> · <a href="/templates">Template Store</a> · Built to launch.</p>
+</footer>
+
+<script>
+  function calculate() {
+    const fixed    = parseFloat(document.getElementById('fixed').value)    || 0;
+    const price    = parseFloat(document.getElementById('price').value)    || 0;
+    const variable = parseFloat(document.getElementById('variable').value) || 0;
+
+    const unitsEl   = document.getElementById('beUnits');
+    const labelEl   = document.getElementById('beUnitLabel');
+    const metricsEl = document.getElementById('resultMetrics');
+    const revenueEl = document.getElementById('beRevenue');
+    const marginEl  = document.getElementById('beMargin');
+
+    if (!fixed && !price && !variable) {
+      unitsEl.innerHTML = '<span class="result-empty">Enter your numbers above</span>';
+      labelEl.textContent = '';
+      metricsEl.style.display = 'none';
+      return;
+    }
+
+    if (price <= variable) {
+      unitsEl.innerHTML = '<span class="result-empty">Price must exceed variable cost</span>';
+      labelEl.textContent = '';
+      metricsEl.style.display = 'none';
+      return;
+    }
+
+    if (price <= 0) {
+      unitsEl.innerHTML = '<span class="result-empty">Enter a price per unit</span>';
+      labelEl.textContent = '';
+      metricsEl.style.display = 'none';
+      return;
+    }
+
+    const contributionMargin = price - variable;
+    const breakEvenUnits     = Math.ceil(fixed / contributionMargin);
+    const breakEvenRevenue   = breakEvenUnits * price;
+    const marginPct          = ((contributionMargin / price) * 100).toFixed(1);
+
+    unitsEl.textContent = breakEvenUnits.toLocaleString();
+    labelEl.textContent = breakEvenUnits === 1 ? 'unit or sale to break even' : 'units or sales to break even';
+    revenueEl.textContent = '$' + breakEvenRevenue.toLocaleString();
+    marginEl.textContent  = marginPct + '%';
+    metricsEl.style.display = 'flex';
+  }
+
+  function submitEmail() {
+    const email = document.getElementById('emailInput').value.trim();
+    if (!email || !email.includes('@')) {
+      document.getElementById('emailInput').focus();
+      return;
+    }
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    // Silent Google Form submission
+    const formId  = '1FAIpQLSdzeM_JmaaN3ECNquaofM2vUoZcnqiCnqOUMexJNG5y6BToFQ';
+    const entryId = 'entry.1589997595';
+    const url     = `https://docs.google.com/forms/d/e/${formId}/formResponse?${entryId}=${encodeURIComponent(email)}&submit=Submit`;
+
+    fetch(url, { method: 'POST', mode: 'no-cors' })
+      .catch(() => {}) // no-cors always throws — this is expected
+      .finally(() => {
+        document.getElementById('emailFormWrap').style.display = 'none';
+        document.getElementById('successBox').classList.add('visible');
+      });
+  }
+
+  // Allow Enter key on email field
+  document.getElementById('emailInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') submitEmail();
+  });
+</script>
+
+</body>
+</html>
