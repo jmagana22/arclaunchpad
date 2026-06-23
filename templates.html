@@ -72,7 +72,7 @@
       text-decoration: none;
     }
 
-    .nav-logo svg { width: 36px; height: 36px; }
+    .nav-logo img { height: 36px; display: block; }
 
     .nav-links {
       display: flex;
@@ -844,16 +844,14 @@
   <nav>
     <div class="nav-inner">
       <a href="/" class="nav-logo">
-        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M18 4L32 30H4L18 4Z" fill="none" stroke="#c9973a" stroke-width="2"/>
-          <path d="M18 14L25 28H11L18 14Z" fill="#c9973a" opacity="0.4"/>
-        </svg>
+        <img src="arc-launchpad-logo.png" alt="ARC Launchpad" height="36">
       </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="/#process">Process</a></li>
         <li><a href="/#services">Services</a></li>
         <li><a href="/#work">Work</a></li>
         <li><a href="/templates" class="active">Templates</a></li>
+        <li><a href="/break-even-calculator">Free Calculator</a></li>
         <li><a href="/#why">Why Us</a></li>
         <li><a href="/#contact" class="nav-cta">Book a Call</a></li>
       </ul>
@@ -903,6 +901,27 @@
   <!-- BUNDLES -->
   <section class="bundles" id="bundles">
     <div class="container">
+      <!-- Free calculator → Financial Foundations Pack bridge -->
+      <div class="arc-bec-bridge">
+        <style>
+          .arc-bec-bridge{background:#F5F0E1;border:1px solid #E8A838;border-radius:12px;
+            padding:28px 32px;max-width:900px;margin:0 auto 48px;display:flex;
+            align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+          .arc-bec-bridge-text{flex:1;min-width:260px;}
+          .arc-bec-bridge-text h3{color:#1B2E4B;font-size:1.25rem;margin:0 0 6px;font-weight:700;}
+          .arc-bec-bridge-text p{color:#3a4a63;font-size:0.95rem;margin:0;line-height:1.5;}
+          .arc-bec-bridge-btn{display:inline-block;background:#1B2E4B;color:#fff;
+            font-weight:600;padding:14px 28px;border-radius:8px;text-decoration:none;
+            white-space:nowrap;transition:background .15s ease;}
+          .arc-bec-bridge-btn:hover{background:#264069;}
+        </style>
+        <div class="arc-bec-bridge-text">
+          <h3>Not sure where to start? Try the free Break-Even Calculator.</h3>
+          <p>It's the lite version of the full tool inside the Financial Foundations Pack — run your numbers, then upgrade when you're ready.</p>
+        </div>
+        <a class="arc-bec-bridge-btn" href="/break-even-calculator">Run My Numbers →</a>
+      </div>
+
       <div class="bundles-header">
         <div>
           <div class="section-label">Template Packs</div>
@@ -1218,6 +1237,7 @@
       <ul class="footer-links">
         <li><a href="/">Home</a></li>
         <li><a href="/templates">Templates</a></li>
+        <li><a href="/break-even-calculator">Free Calculator</a></li>
         <li><a href="/#contact">Contact</a></li>
         <li><a href="mailto:hello@arclaunchpad.com">hello@arclaunchpad.com</a></li>
       </ul>
